@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { DatePickerInput } from '@/components/ui/DatePicker'
@@ -21,7 +23,7 @@ const chartData = [
 
 export default function Dashboard() {
     return (
-        <div className='flex flex-col gap-6 p-4'>
+        <div className='flex flex-col gap-6'>
             {/* header */}
             <section className='flex justify-between'>
                 <div className="flex flex-col">

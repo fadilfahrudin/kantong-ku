@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react'
-import { Button } from '../ui/button';
 import { cn } from 'cn';
 import { ChartNoAxesColumn, House, Plus, ScrollText, WalletMinimal } from 'lucide-react';
 
@@ -12,9 +11,8 @@ interface ButtonProps extends React.ComponentPropsWithRef<'button'> {
 const ButtonNavigation = forwardRef<HTMLButtonElement, ButtonProps>(
     ({ children, className, ...props }, ref) => {
         return (
-            <Button
+            <button
                 ref={ref}
-                variant="ghost"
                 className={cn(
                     'w-auto h-11 flex flex-col justify-center items-center',
                     className
@@ -22,7 +20,7 @@ const ButtonNavigation = forwardRef<HTMLButtonElement, ButtonProps>(
                 {...props}
             >
                 {children}
-            </Button>
+            </button>
         );
     }
 );
@@ -31,7 +29,7 @@ ButtonNavigation.displayName = 'ButtonNavigation';
 
 const Navigation = () => {
     return (
-        <div className='sticky -bottom-1 bg-white h-auto left-0 w-full p-4 inset-shadow-sm'>
+        <nav className='sticky -bottom-1 bg-white h-auto left-0 w-full max-w-lg mx-auto p-4 inset-shadow-sm'>
             <div className="grid grid-cols-5 gap-2">
                 <ButtonNavigation className='text-primary'>
                     <House size={30} className='text-2xl' />
@@ -53,7 +51,7 @@ const Navigation = () => {
                     <span className='text-xs'>Report</span>
                 </ButtonNavigation>
             </div>
-        </div>
+        </nav>
     )
 }
 

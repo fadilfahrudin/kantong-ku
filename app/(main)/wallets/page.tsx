@@ -1,11 +1,16 @@
+"use client"
+
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { ArrowDown, ArrowUp, Landmark, Plus, TrendingUp } from 'lucide-react'
-import React from 'react'
+import { ArrowDown, ArrowUp, Banknote, Landmark, Plus, TrendingUp, WalletCards } from 'lucide-react'
+import { usePathname, useRouter } from 'next/navigation'
 
 export default function Wallets() {
+    const route = useRouter()
+    const pathname = usePathname()
+
     return (
-        <div className='flex flex-col gap-6 p-4'>
+        <div className='flex flex-col gap-6 min-h-screen'>
             {/* header */}
             <section className='flex justify-between gap-4'>
                 <div className="flex flex-col">
@@ -16,6 +21,7 @@ export default function Wallets() {
                 </div>
                 <Button
                     className="rounded-md shrink-0"
+                    onClick={() => route.push(`${pathname}/create`)}
                 >
                     <Plus />
                     <span>Add Wallet</span>
@@ -68,6 +74,53 @@ export default function Wallets() {
                         </div>
                         <span>2 accounts</span>
                     </div>
+                    <Card>
+                        <div className='grid grid-cols-6 gap-2 px-4'>
+                            <div className='aspeck-square h-auto col-span-1 flex justify-center items-center rounded-md bg-primary-foreground'>
+                                <Landmark size={28} />
+                            </div>
+                            <div className='col-span-4'>
+                                <span>Bank Mandiri</span>
+                                <span className='ml-2 font-semibold'>2167289</span>
+                                <span className='block font-bold text-2xl'>Rp.546.9000</span>
+                            </div>
+                            <div className='bg-primary/10 h-max text-center py-1 text-primary rounded-xl'>Active</div>
+                        </div>
+                    </Card>
+                    <Card>
+                        <div className='grid grid-cols-6 gap-2 px-4'>
+                            <div className='aspeck-square h-auto col-span-1 flex justify-center items-center rounded-md bg-primary-foreground'>
+                                <Landmark size={28} />
+                            </div>
+                            <div className='col-span-4'>
+                                <span>Bank BCA</span>
+                                <span className='ml-2 font-semibold'>219999</span>
+                                <span className='block font-bold text-2xl'>Rp.1.546.9000</span>
+                            </div>
+                            <div className='bg-primary/10 h-max text-center py-1 text-primary rounded-xl'>Active</div>
+                        </div>
+                    </Card>
+                </div>
+                {/* E Wallets */}
+                <div className='flex flex-col gap-2'>
+                    <div className="flex justify-between">
+                        <div className='flex items-center gap-1 text-primary'>
+                            <WalletCards />
+                            <span className='font-bold'>Cash</span>
+                        </div>
+                        <span>2 Wallets</span>
+                    </div>
+                    <Card>
+                        <div className='grid grid-cols-6 gap-2 px-4'>
+                            <div className='aspeck-square h-auto col-span-1 flex justify-center items-center rounded-md bg-primary-foreground'>
+                                <Banknote size={28} className='text-primary' />
+                            </div>
+                            <div className='col-span-4'>
+                                <span>Fadils Wallet</span>
+                                <span className='block font-bold text-2xl'>Rp.546.9000</span>
+                            </div>
+                        </div>
+                    </Card>
                 </div>
             </section>
         </div>
