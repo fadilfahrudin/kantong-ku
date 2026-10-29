@@ -10,7 +10,7 @@ export default function DetailLayout({ children }: LayoutProps<"/">) {
     return (
         <>
             <HeaderDetail />
-            <main className="w-full max-w-lg flex-1 mx-auto bg-white relative p-4">
+            <main className="w-full max-w-lg flex-1 mx-auto bg-white relative py-4 px-6">
                 {children}
             </main>
         </>

@@ -1,6 +1,8 @@
+'use client'
 import React, { forwardRef } from 'react'
 import { cn } from 'cn';
 import { ChartNoAxesColumn, House, Plus, ScrollText, WalletMinimal } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
 
 // Mengambil seluruh props bawaan HTML button
 interface ButtonProps extends React.ComponentPropsWithRef<'button'> {
@@ -28,14 +30,22 @@ const ButtonNavigation = forwardRef<HTMLButtonElement, ButtonProps>(
 ButtonNavigation.displayName = 'ButtonNavigation';
 
 const Navigation = () => {
+    const route = useRouter();
+    const pathName = usePathname();
     return (
         <nav className='sticky -bottom-1 bg-white h-auto left-0 w-full max-w-lg mx-auto p-4 inset-shadow-sm'>
             <div className="grid grid-cols-5 gap-2">
-                <ButtonNavigation className='text-primary'>
+                <ButtonNavigation
+                    onClick={() => route.push('/dashboard')}
+                    className={cn(pathName === '/dashboard' && 'text-primary')}
+                >
                     <House size={30} className='text-2xl' />
                     <span className='text-xs'>Dashboard</span>
                 </ButtonNavigation>
-                <ButtonNavigation>
+                <ButtonNavigation
+                    onClick={() => route.push('/wallets')}
+                    className={cn(pathName === '/wallets' && 'text-primary')}
+                >
                     <WalletMinimal size={30} />
                     <span className='text-xs'>Wallets</span>
                 </ButtonNavigation>
