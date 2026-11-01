@@ -11,12 +11,27 @@ const HeaderDetail = () => {
     const pathName = usePathname();
 
     const getHeaderConfig: DetailPageType = useMemo(() => {
-        const config = DETAIL_PAGE.find(url => url.pathName === pathName)
+        // Match exact pathname
+        const config = DETAIL_PAGE.find(
+            url => url.pathName === pathName
+        );
+
+        // Match dynamic detail route with slug
+        const isWalletDetail = /^\/wallets\/detail\/[^/]+$/.test(pathName);
+
+        if (isWalletDetail) {
+            return {
+                pathName,
+                showBackButton: true,
+                title: "Rincian Kantong"
+            };
+        }
+
         return {
             pathName: config?.pathName ?? '',
             showBackButton: config?.showBackButton ?? false,
             title: config?.title ?? ''
-        }
+        };
     }, [pathName])
 
     return (
