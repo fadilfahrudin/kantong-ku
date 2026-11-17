@@ -2,8 +2,65 @@
 
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { ArrowDown, ArrowUp, Banknote, Landmark, Plus, TrendingUp, WalletCards } from 'lucide-react'
+import { Wallet } from '@/types/wallets.type'
+import { ArrowDown, ArrowUp, Landmark, Plus, Smartphone, WalletCards } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
+import { WalletCard } from './components/WalletCard'
+
+const MOCK_DATA_LIST_WALLETS: Wallet[] = [
+    {
+        id: 1,
+        walletType: 'bank',
+        name: 'BCA Bank Account',
+        accountNumber: '2167289',
+        initialBalance: 5469000,
+        balance: 5469000,
+        currency: 'IDR',
+        createdAt: '2023-10-01',
+        updatedAt: '2023-10-01',
+    },
+    {
+        id: 2,
+        walletType: 'bank',
+        name: 'Mandiri Bank Account',
+        accountNumber: '2167289',
+        initialBalance: 5469000,
+        balance: 5469000,
+        currency: 'IDR',
+        createdAt: '2023-10-01',
+        updatedAt: '2023-10-01'
+    },
+    {
+        id: 3,
+        walletType: 'e-wallet',
+        name: 'Gopay Wallet',
+        initialBalance: 5469000,
+        balance: 5469000,
+        currency: 'IDR',
+        createdAt: '2023-10-01',
+        updatedAt: '2023-10-01'
+    },
+    {
+        id: 4,
+        walletType: 'e-wallet',
+        name: 'Dana Wallet',
+        initialBalance: 5469000,
+        balance: 5469000,
+        currency: 'IDR',
+        createdAt: '2023-10-01',
+        updatedAt: '2023-10-01'
+    },
+    {
+        id: 5,
+        walletType: 'cash',
+        name: 'Fadils Wallet',
+        initialBalance: 5469000,
+        balance: 5469000,
+        currency: 'IDR',
+        createdAt: '2023-10-01',
+        updatedAt: '2023-10-01'
+    }
+]
 
 export default function Wallets() {
     const route = useRouter()
@@ -45,18 +102,14 @@ export default function Wallets() {
                                 <p className='font-light'>Across 5 active wallets</p>
                             </div>
                         </div>
-                        <div className="grid grid-cols-3 gap-2 bg-primary-foreground p-3 rounded-xl">
+                        <div className="grid grid-cols-2 gap-2 bg-primary-foreground p-3 rounded-xl">
                             <div>
                                 <span className='flex'><ArrowDown className='text-primary' size={16} /> Income</span>
-                                <span className='text-xl font-bold break-all'>Rp10.500.000</span>
+                                <span className='text-xl font-bold break-all text-primary'>Rp10.500.000</span>
                             </div>
                             <div>
                                 <span className='flex'><ArrowUp className='text-destructive' size={16} /> Expanse</span>
-                                <span className='text-xl font-bold break-all'>Rp7.250.000</span>
-                            </div>
-                            <div className='text-wrap'>
-                                <span className='flex'><TrendingUp className='text-primary' size={16} /> Income</span>
-                                <span className='text-xl font-bold break-all'>Rp10.500.000</span>
+                                <span className='text-xl font-bold break-all text-destructive/80'>Rp7.250.000</span>
                             </div>
                         </div>
                     </div>
@@ -72,55 +125,39 @@ export default function Wallets() {
                             <Landmark />
                             <span className='font-bold'>Bank Accounts</span>
                         </div>
-                        <span>2 accounts</span>
+                        <span>{MOCK_DATA_LIST_WALLETS.filter((wallet) => wallet.walletType === 'bank').length} accounts</span>
                     </div>
-                    <Card>
-                        <div className='grid grid-cols-6 gap-2 px-4'>
-                            <div className='aspeck-square h-auto col-span-1 flex justify-center items-center rounded-md bg-primary-foreground'>
-                                <Landmark size={28} />
-                            </div>
-                            <div className='col-span-4'>
-                                <span>Bank Mandiri</span>
-                                <span className='ml-2 font-semibold'>2167289</span>
-                                <span className='block font-bold text-2xl'>Rp.546.9000</span>
-                            </div>
-                            <div className='bg-primary/10 h-max text-center py-1 text-primary rounded-xl'>Active</div>
-                        </div>
-                    </Card>
-                    <Card>
-                        <div className='grid grid-cols-6 gap-2 px-4'>
-                            <div className='aspeck-square h-auto col-span-1 flex justify-center items-center rounded-md bg-primary-foreground'>
-                                <Landmark size={28} />
-                            </div>
-                            <div className='col-span-4'>
-                                <span>Bank BCA</span>
-                                <span className='ml-2 font-semibold'>219999</span>
-                                <span className='block font-bold text-2xl'>Rp.1.546.9000</span>
-                            </div>
-                            <div className='bg-primary/10 h-max text-center py-1 text-primary rounded-xl'>Active</div>
-                        </div>
-                    </Card>
+                    {MOCK_DATA_LIST_WALLETS.filter((wallet) => wallet.walletType === 'bank').map((wallet) => (
+                        <WalletCard key={wallet.id} {...wallet} />
+                    ))}
                 </div>
+
                 {/* E Wallets */}
                 <div className='flex flex-col gap-2'>
                     <div className="flex justify-between">
-                        <div className='flex items-center gap-1 text-primary'>
+                        <div className='flex items-center gap-1'>
+                            <Smartphone />
+                            <span className='font-bold'>E-Wallets</span>
+                        </div>
+                        <span>{MOCK_DATA_LIST_WALLETS.filter((wallet) => wallet.walletType === 'e-wallet').length} Wallets</span>
+                    </div>
+                    {MOCK_DATA_LIST_WALLETS.filter((wallet) => wallet.walletType === 'e-wallet').map((wallet) => (
+                        <WalletCard key={wallet.id} {...wallet} />
+                    ))}
+                </div>
+
+                {/* Cash */}
+                <div className='flex flex-col gap-2'>
+                    <div className="flex justify-between">
+                        <div className='flex items-center gap-1 '>
                             <WalletCards />
                             <span className='font-bold'>Cash</span>
                         </div>
-                        <span>2 Wallets</span>
+                        <span>{MOCK_DATA_LIST_WALLETS.filter((wallet) => wallet.walletType === 'cash').length} Wallets</span>
                     </div>
-                    <Card>
-                        <div className='grid grid-cols-6 gap-2 px-4'>
-                            <div className='aspeck-square h-auto col-span-1 flex justify-center items-center rounded-md bg-primary-foreground'>
-                                <Banknote size={28} className='text-primary' />
-                            </div>
-                            <div className='col-span-4'>
-                                <span>Fadils Wallet</span>
-                                <span className='block font-bold text-2xl'>Rp.546.9000</span>
-                            </div>
-                        </div>
-                    </Card>
+                    {MOCK_DATA_LIST_WALLETS.filter((wallet) => wallet.walletType === 'cash').map((wallet) => (
+                        <WalletCard key={wallet.id} {...wallet} />
+                    ))}
                 </div>
             </section>
         </div>

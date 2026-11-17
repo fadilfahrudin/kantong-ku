@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from "@/components/ui/button"
 import {
     Field,
@@ -22,6 +24,7 @@ import {
     BriefcaseBusiness,
     Landmark,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const walletOptions = [
     {
@@ -29,46 +32,47 @@ const walletOptions = [
         label: "Wallet",
         icon: Wallet,
         color: "bg-blue-100 text-blue-600",
-        selectedColor: "border-blue-500",
+        selectedRingColor: "has-data-checked:ring-blue-600",
     },
     {
         value: "credit-card",
         label: "Credit Card",
         icon: CreditCard,
         color: "bg-purple-100 text-purple-600",
-        selectedColor: "border-purple-500",
+        selectedRingColor: "has-data-checked:ring-purple-600",
     },
     {
         value: "cash",
         label: "Cash",
         icon: Banknote,
         color: "bg-green-100 text-green-600",
-        selectedColor: "border-green-500",
+        selectedRingColor: "has-data-checked:ring-green-600",
     },
     {
         value: "savings",
         label: "Savings",
         icon: PiggyBank,
         color: "bg-amber-100 text-amber-600",
-        selectedColor: "border-amber-500",
+        selectedRingColor: "has-data-checked:ring-amber-600",
     },
     {
         value: "business",
         label: "Business",
         icon: BriefcaseBusiness,
         color: "bg-indigo-100 text-indigo-600",
-        selectedColor: "border-indigo-500",
+        selectedRingColor: "has-data-checked:ring-indigo-600",
     },
     {
         value: "bank",
         label: "Bank",
         icon: Landmark,
         color: "bg-rose-100 text-rose-600",
-        selectedColor: "border-rose-500",
+        selectedRingColor: "has-data-checked:ring-rose-600",
     },
 ];
 
 export default function WalletCreate() {
+    const router = useRouter();
     return (
         <div className="w-full max-w-md">
             <form>
@@ -108,8 +112,6 @@ export default function WalletCreate() {
                                     type="number"
                                     placeholder="0"
                                     min="0"
-                                    step="any"
-                                    defaultValue="0"
                                     required
                                 />
                             </InputGroup>
@@ -131,12 +133,9 @@ export default function WalletCreate() {
                                             key={option.value}
                                             htmlFor={`wallet-${option.value}`}
                                             className={cn(
-                                                "flex cursor-pointer items-center justify-center rounded-full  p-1",
-                                                // "has-data-[state=cheked]:bg-transparent",
-                                                "has-data-[state=cheked]:ring-2",
-                                                "has-data-[state=cheked]:ring-ring",
-                                                "has-data-[state=cheked]:ring-offset-2",
-                                                "has-data-[state=cheked]:ring-offset-background",
+                                                "flex cursor-pointer items-center justify-center rounded-full p-1 transition-all",
+                                                "has-data-checked:ring-2",
+                                                option.selectedRingColor
                                             )}
                                         >
                                             <RadioGroupItem
@@ -148,10 +147,8 @@ export default function WalletCreate() {
                                             <div className="flex items-center justify-center">
                                                 <div
                                                     className={cn(
-                                                        "flex size-12 items-center justify-center rounded-full transition-all",
+                                                        "flex size-12 items-center justify-center rounded-full transition-all ",
                                                         option.color,
-                                                        `peer-data-[state=checked]:${option.selectedColor}`,
-                                                        "peer-data-[state=checked]:bg-accent peer-focus-visible:ring-2 peer-focus-visible:ring-ring"
                                                     )}
                                                 >
                                                     <Icon className="size-5" />
@@ -170,7 +167,7 @@ export default function WalletCreate() {
                             Create Wallet
                         </Button>
 
-                        <Button variant="outline" type="button">
+                        <Button variant="outline" type="button" onClick={() => router.back()}>
                             Cancel
                         </Button>
                     </Field>

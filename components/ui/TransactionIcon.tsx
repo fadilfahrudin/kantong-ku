@@ -2,6 +2,7 @@ import {
   CircleEllipsis,
   Clapperboard,
   Gamepad2,
+  Globe,
   LucideIcon,
   ShoppingBag,
   TrainFront,
@@ -41,39 +42,49 @@ export function TransactionIcon({
   switch (category) {
     case "food":
       Icon = Utensils
+      iconClassName = "text-red-500 bg-red-400/20"
       break
 
     case "shopping":
       Icon = ShoppingBag
+      iconClassName = "text-green-500 bg-green-400/20"
       break
 
     case "entertainment":
       Icon = Clapperboard
-      iconClassName = "text-primary"
+      iconClassName = "text-pink-500 bg-pink-400/20"
       break
 
-    case "transport":
+    case "transportation":
       Icon = TrainFront
-      iconClassName = "text-primary"
+      iconClassName = "text-primary/80 bg-primary/20"
       break
 
     case "fun":
       Icon = Gamepad2
-      iconClassName = "text-primary"
+      iconClassName = "text-lime-500 bg-lime-400/20"
       break
 
     case "salary":
       Icon = WalletCards
+      iconClassName = "text-green-500 bg-green-400/20"
       break
 
     case "electricity":
       Icon = Zap
-      iconClassName = "text-yellow-950"
+      iconClassName = "text-yellow-950 bg-yellow-400/20"
       break
-
-    case "other":
+    case "internet":
+      Icon = Globe
+      iconClassName = "text-blue-500 bg-blue-400/20"
+      break
+    case "investment":
+      Icon = WalletCards
+      iconClassName = "text-purple-500 bg-purple-400/20"
+      break
+    case "others":
       Icon = CircleEllipsis
-      iconClassName = "text-gray-900"
+      iconClassName = "text-gray-900 bg-gray-400/20"
       break
   }
 
